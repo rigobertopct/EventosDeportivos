@@ -189,9 +189,10 @@ class Atleta(models.Model):
 
 class ClaseDeportiva(models.Model):
     nombre = models.CharField(max_length=250, verbose_name="Nombre")
-    siglas = models.CharField(max_length=250, verbose_name="Apellido")
+    siglas = models.CharField(max_length=250, verbose_name="Sigla")
     deporte_id = models.ForeignKey(Deporte, on_delete=models.SET_NULL, null=True, blank=True)
-
+    def __str__(self):
+        return self.deporte_id.deporte
     def __str__(self):
         return self.nombre
 
