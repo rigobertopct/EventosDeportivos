@@ -1,0 +1,20 @@
+<div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 class="modale-title">Nueva Empresa</h2>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form action="{%url 'nuevo_deporte'%}" method="post">
+        <div class="modal-body">
+        {% load widget_tweaks %}
+        {%csrf_token%}
+        <label class="control-label">Nombre</label>
+        {{form.nombre| attr:"class:form-control"| attr:"rows:1"}}
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-success">Confirmar</button>
+        </div>
+            </form>
+    </div>
+</div>

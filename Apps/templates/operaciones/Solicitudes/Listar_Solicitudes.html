@@ -1,0 +1,105 @@
+{% extends '_layout.html' %}
+{%block pagina%}Solicitudes{%endblock%}
+{%block title%}Solicitudes{%endblock%}
+{% block contenido %}
+<br>
+<br>
+<div class="card">
+    <div class="carda-body">
+        <h2 class="p-4">Listado de Solicitudes</h2>
+        <div class="p-4">
+            {%if perms.Operaciones.add_solicitud%}
+            <button onclick="abrir('{%url 'nueva_solicitud'%}')"  class="btn btn-danger">Nuevo</button>
+            {%endif%}
+            <br>
+            <br>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                <th scope="col">Tipo de Solicitud</th>
+                <th scope="col">Fecha de la Solicitud</th>
+                <th scope="col">Fecha de la Inspeccion</th>
+                <th scope="col">Cliente</th>
+                {%ifequal c.medio 'buque'%}
+                <th scope="col">Buque</th>
+                {%else%}
+                <th scope="col">Contenedor</th>
+                {%endifequal%}
+                <th scope="col">Servicios</th>
+                <th scope="col">Opciones</th>
+            </tr>
+            </thead>
+            <tbody>
+                {%for c in solicitudes%}
+                <tr>
+                <td>{{c.tipo_solicitud}}</td>
+                <td>{{c.fecha_Solicitud}}</td>
+                <td>{{c.fecha_Inspeccion}}</td>
+                <td>{{c.id_cliente.empresa.nombre}}</td>
+                    {%ifequal c.medio 'buque'%}
+                        <td>
+                            {%for b in barcos%}
+                            {%ifequal b.solicitud.id c.id%}
+                            {{b.nombre}}
+                            {%endifequal%}
+                            {%endfor%}
+                        </td>
+                    {%else%}
+                        <td>
+                            {%for b in contenedores%}
+                            {%ifequal b.solicitud.id c.id%}
+                            {{b.numero}}
+                            {%endifequal%}
+                            {%endfor%}
+                        </td>
+                    {%endifequal%}
+                <td>
+                    {%for s in c.servicio.all%}
+                    *{{s.nombre}}<br>
+                    {%endfor%}
+                </td>
+                <td>
+                    {%if perms.Operaciones.add_solicitud%}
+                    <a href="{%url 'modificar_solicitud' c.id%}"  class="btn btn-sm btn-success">Modificar</a>|
+                    {%endif%}
+                    {%if perms.Operaciones.add_solicitud%}
+                     <a href="#" onclick="eliminar({{c.id}})" class="btn btn-sm btn-danger">Eliminar</a></td>
+                    {%endif%}
+            </tr>
+                {%endfor%}
+            </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="edicion" role="dialog">
+
+</div>
+{% endblock %}
+{%block js%}
+<script type="text/javascript">
+    function abrir(url){
+    $('#edicion').load(url, function(){
+    $(this).modal('show');
+    })
+    }
+    function eliminar(id){
+     Swal.fire({
+     "title":"¿Estas seguro?",
+     "text": "esta accion no se puede deshacer",
+     "icon":"question",
+     "showCancelButton":true,
+     "cancelButtonText":"No, Cancelar",
+     "confirmButtonText":"Si, Eliminar",
+     "reverseButtons":true,
+     "confirmButtonColor":"#dc3545",
+     })
+     .then(function(result){
+     if(result.isConfirmed){
+     window.location.href="/eliminar_solicitud/"+id+"/"
+     }
+     }
+     )
+     }
+</script>
+{%endblock%}

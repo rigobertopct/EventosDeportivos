@@ -1,0 +1,72 @@
+{% extends '_layout.html' %}
+{%block pagina%}Servicios{%endblock%}
+{%block title%}Servicios{%endblock%}
+{% block contenido %}
+<br>
+<br>
+<div class="card">
+    <div class="carda-body">
+        <h2 class="p-4">Listado de Servicios</h2>
+        <div class="p-4">
+            {%if perms.Operaciones.add_servicio%}
+            <button onclick="abrir('{%url 'nuevo_servicio'%}')"  class="btn btn-danger">Nuevo</button>
+            {%endif%}
+            <br>
+            <br>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                <th scope="col">Nombre</th>
+                <th scope="col">Opciones</th>
+            </tr>
+            </thead>
+            <tbody>
+                {%for c in servicios%}
+                <tr>
+                <td>{{c.nombre}}</td>
+                <td>
+                    {%if perms.Operaciones.change_servicio%}
+                    <a href="{%url 'modificar_servicio' c.id%}"  class="btn btn-sm btn-success">Modificar</a>|
+                    {%endif%}
+                    {%if perms.Operaciones.delete_servicio%}
+                    <a href="#" onclick="eliminar({{c.id}})" class="btn btn-sm btn-danger">Eliminar</a></td>
+                    {%endif%}
+            </tr>
+
+                {%endfor%}
+            </tbody>
+            </table>
+        </div>
+    </div>
+</div>   
+<div class="modal fade" id="edicion" role="dialog">
+
+</div>
+{% endblock %}
+{%block js%}
+<script type="text/javascript">
+    function abrir(url){
+    $('#edicion').load(url, function(){
+    $(this).modal('show');
+    })
+    }
+    function eliminar(id){
+     Swal.fire({
+     "title":"¿Estas seguro?",
+     "text": "esta accion no se puede deshacer",
+     "icon":"question",
+     "showCancelButton":true,
+     "cancelButtonText":"No, Cancelar",
+     "confirmButtonText":"Si, Eliminar",
+     "reverseButtons":true,
+     "confirmButtonColor":"#dc3545",
+     })
+     .then(function(result){
+     if(result.isConfirmed){
+     window.location.href="/eliminar_servicio/"+id+"/"
+     }
+     }
+     )
+     }
+</script>
+{%endblock%}

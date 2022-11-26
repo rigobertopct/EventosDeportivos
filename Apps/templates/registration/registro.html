@@ -1,0 +1,30 @@
+<div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 class="modale-title">Nuevo Sevicio</h2>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form action="{%url 'registro'%}" method="post">
+            <div class="modal-body">
+                {% load widget_tweaks %}
+            {%csrf_token%}
+                <label class="control-label">Nombre</label>
+                {{form.first_name| attr:"class:form-control"| attr:"placeholder:Nombre"}}
+                <label class="control-label">Apellidos</label>
+                {{form.last_name| attr:"class:form-control"| attr:"placeholder:Apellidos"}}
+                <label class="control-label">Usuario</label>
+                {{form.username| attr:"class:form-control"| attr:"placeholder:Usuario"}}
+                <label class="control-label">Contraseña</label>
+                {{form.password1| attr:"class:form-control"| attr:"placeholder:Contraseña"| attr:"type:password"}}
+                <label class="control-label">Confirmar Contraseña</label>
+                {{form.password2| attr:"class:form-control"| attr:"placeholder:Repetir Contraseña"| attr:"type:password"}}
+                <label class="control-label">Correo</label>
+                {{form.email| attr:"class:form-control"| attr:"placeholder:Correo"| attr:"type:emai"}}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn btn-success">Confirmar</button>
+            </div>
+        </form>
+    </div>
+</div>

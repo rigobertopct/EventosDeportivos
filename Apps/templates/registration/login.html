@@ -1,0 +1,80 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link href="{%static 'bootstrap5/css/bootstrap.min.css' %}" rel="stylesheet" id="bootstrap-css">
+    <link href="{%static 'bootstrap5/style.css' %}" rel="stylesheet" id="bootstrap-css">    
+</head>
+<body class="bg-dark">
+    <section>
+        <div class="row g-0">
+
+
+
+            <div class="col-lg-7 d-none d-lg-block">
+                <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                        <li data-target="#myCarousel" data-slide-to="1"></li>
+                        <li data-target="#myCarousel" data-slide-to="2"></li>
+                    </ol>
+                    <div class="carousel-inner">
+                        <div class="carousel-item img-1 min-vh-100 active">
+                        </div>
+
+                        <div class="carousel-item img-2 min-vh-100">
+                        </div>
+                        <div class="carousel-item img-3 min-vh-100">
+                        </div>
+                    </div>
+                    <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </a>
+                </div>
+
+            </div>
+
+
+
+            <div class="col-lg-5 d-flex flex-column align-items-end min-vh-100">
+                <div class="px-lg-5 pt-lg-4 pb-lg-3 p-4 w-100 mb-auto">
+                    <img src="{% static 'Imagenes/LOGO.png' %}" class="img-fluid" width="150" height="70">
+                </div>
+                <div class="px-lg-5 py-lg-4 p-4 w-100 align-self-center">
+                    <h1 class="font-weight-bold mb-4">Bienvenidos a nuestra Pagina</h1>
+                    <form method="post">
+                       
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                        <div class="form-group">
+                            {% load widget_tweaks %}
+                                {%csrf_token%}
+                            <label class="control-label">Usuario</label>
+                                {{form.username | attr:"class:form-control"| attr:"placeholder:Usuario"}}
+                            <label class="control-label">Contraseña</label>
+                                {{form.password | attr:"class:form-control"| attr:"placeholder:Contraseña"}}
+                        </div>
+                       
+                        <div class="form-group">
+                           <br /> <button type="submit" class="btn btn-rojocubacontrol w-100">Aceptar</button>
+                        </div>
+                       
+                    </form>
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+      <script src="{%static 'bootstrap5/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{%static 'bootstrap5/js/bootstrap.min.js' %}"></script>
+
+</body>
+</html>
+

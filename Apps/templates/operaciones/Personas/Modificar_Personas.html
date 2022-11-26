@@ -1,0 +1,35 @@
+{% extends '_layout.html' %}
+{%block pagina%}Modificar Persona{%endblock%}
+{%block title%}Personas{%endblock%}
+{% block contenido %}
+<br>
+<br>
+<div class="card">
+  <div class="carda-body">
+    <h2 class="p-4">Modificar Persona</h2>
+    <div class="p-4 formu">
+    <form method="post">
+            {% load widget_tweaks %}
+            {%csrf_token%}
+        <label class="control-label">CI</label>
+        {{form.ci| attr:"class:form-control"| attr:"rows:1"}}
+        <label class="control-label">Nombre</label>
+        {{form.nombre| attr:"class:form-control"}}
+        <label class="control-label">Apellidos</label>
+        {{form.apellidos| attr:"class:form-control"| attr:"rows:1"}}
+        <label class="control-label">Cargo</label>
+        {{form.cargo| attr:"class:form-control"| attr:"rows:1"}}
+        <label class="control-label">Telefono</label>
+        {{form.telefono| attr:"class:form-control"| attr:"type:phone"}}
+        <label class="control-label">Correo</label>
+        {{form.correo| attr:"class:form-control"| attr:"type:email"}}
+        <br>
+        <br>
+
+        <button type="submit" class="btn btn-danger float">Guardar</button>
+    </div>
+    </form></div>
+</div>
+</div>
+
+{% endblock %}

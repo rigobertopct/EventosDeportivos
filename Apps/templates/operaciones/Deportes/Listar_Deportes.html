@@ -1,0 +1,66 @@
+{% extends '_layout.html' %}
+{%block pagina%}Deportes{%endblock%}
+{%block title%}Deportes{%endblock%}
+{% block contenido %}
+<br>
+<div class="card">
+    <div class="carda-body">
+        <h2 class="p-4">Listado de Deportes</h2>
+        <div class="p-4">
+            <button onclick="abrir('{%url 'nuevo_deporte'%}')"  class="btn btn-danger">Nuevo</button>
+            <br>
+            <br>
+            <table class="dataTable">
+                <thead>
+                <tr>
+                <th scope="col">Nombre</th>
+                <th scope="col">Opciones</th>
+            </tr>
+            </thead>
+            <tbody>
+                {%for c in deportes%}
+                <tr>
+                <td>{{c.nombre}}</td>
+                <td>
+                    <a href="{%url 'modificar_deportes' c.id%}" class="btn btn-sm btn-info"><i class="bi bi-pencil"></i> Editar</a>
+                                ||
+                    <a onclick="eliminar({{ c.id }})" class="btn btn-sm btn-danger"><i class="bi bi-trash"></i> Eliminar
+                    </a></td>
+                </tr>
+                {%endfor%}
+            </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="edicion" role="dialog">
+
+</div>
+{% endblock %}
+{%block js%}
+<script type="text/javascript">
+    function abrir(url){
+    $('#edicion').load(url, function(){
+    $(this).modal('show');
+    })
+    }
+    function eliminar(id){
+     Swal.fire({
+     "title":"¿Estas seguro?",
+     "text": "esta accion no se puede deshacer",
+     "icon":"question",
+     "showCancelButton":true,
+     "cancelButtonText":"No, Cancelar",
+     "confirmButtonText":"Si, Eliminar",
+     "reverseButtons":true,
+     "confirmButtonColor":"#dc3545",
+     })
+     .then(function(result){
+     if(result.isConfirmed){
+     window.location.href="/eliminar_deportes/"+id+"/"
+     }
+     }
+     )
+     }
+</script>
+{%endblock%}

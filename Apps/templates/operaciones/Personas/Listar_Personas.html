@@ -1,0 +1,80 @@
+{% extends '_layout.html' %}
+{%block pagina%}Personas{%endblock%}
+{%block title%}Personas{%endblock%}
+{% block contenido %}
+<br>
+<br>
+<div class="card">
+    <div class="carda-body">
+        <h2 class="p-4">Listado de Personas</h2>
+        <div class="p-4">
+            {%if perms.Operaciones.add_persona%}
+            <button onclick="abrir('{%url 'nueva_persona'%}')"  class="btn btn-danger">Nuevo</button>
+            {%endif%}
+             <br>
+            <br>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                <th scope="col">CI</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Apellidos</th>
+                <th scope="col">Cargo</th>
+                <th scope="col">Telefono</th>
+                <th scope="col">Correo</th>
+            </tr>
+            </thead>
+            <tbody>
+                {%for c in personas%}
+                <tr>
+                <td>{{c.ci}}</td>
+                <td>{{c.nombre}}</td>
+                <td>{{c.apellidos}}</td>
+                <td>{{c.cargo}}</td>
+                <td>{{c.telefono}}</td>
+                <td>{{c.correo}}</td>
+                <td>
+                    {%if perms.Operaciones.change_persona%}
+                    <a href="{%url 'modificar_persona' c.ci%}"  class="btn btn-sm btn-success">Modificar</a>|
+                    {%endif%}
+                    {%if perms.Operaciones.delete_persona%}
+                    <a href="#" onclick="eliminar({{c.ci}})" class="btn btn-sm btn-danger">Eliminar</a></td>
+                    {%endif%}
+            </tr>
+                {%endfor%}
+            </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="edicion" role="dialog">
+
+</div>
+{% endblock %}
+{%block js%}
+<script type="text/javascript">
+    function abrir(url){
+    $('#edicion').load(url, function(){
+    $(this).modal('show');
+    })
+    }
+    function eliminar(id){
+     Swal.fire({
+     "title":"¿Estas seguro?",
+     "text": "esta accion no se puede deshacer",
+     "icon":"question",
+     "showCancelButton":true,
+     "cancelButtonText":"No, Cancelar",
+     "confirmButtonText":"Si, Eliminar",
+     "reverseButtons":true,
+     "confirmButtonColor":"#dc3545",
+     })
+     .then(function(result){
+     if(result.isConfirmed){
+     window.location.href="/eliminar_persona/"+id+"/"
+     }
+     }
+     )
+     }
+</script>
+{%endblock%}

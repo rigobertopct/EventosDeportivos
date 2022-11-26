@@ -1,0 +1,26 @@
+{% extends '_layout.html' %}
+{%block pagina%}Modificar Servicios{%endblock%}
+{%block title%}Servicios{%endblock%}
+{% block contenido %}
+<br>
+<br>
+<div class="card">
+  <div class="carda-body">
+    <h2 class="p-4">Modificar Servicio</h2>
+    <div class="p-4 formu">
+    <form method="post">
+            {% load widget_tweaks %}
+            {%csrf_token%}
+            <label class="control-label">Servicio</label>
+            {{form.nombre| attr:"class:form-control"| attr:"rows:1"}}
+        <br>
+        <br>
+
+        <button type="submit" class="btn btn-danger float">Crear Servicio</button>
+        <button type="reset" class="btn btn-secondary float">Cancelar</button>
+    </div>
+    </form></div>
+</div>
+</div>
+
+{% endblock %}

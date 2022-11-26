@@ -1,0 +1,37 @@
+{% extends '_layout.html' %}
+{%block pagina%}Modificar Contenedor{%endblock%}
+{%block title%}Contenedores{%endblock%}
+{% block contenido %}
+<br>
+<br>
+<div class="card">
+  <div class="carda-body">
+    <h2 class="p-4">Modificar Contenedor</h2>
+    <div class="p-4 formu">
+    <form method="post">
+            {% load widget_tweaks %}
+            {%csrf_token%}
+         <label class="control-label">Numero de Contenedor</label>
+        {{form.numero| attr:"class:form-control"| attr:"rows:1"}}
+        <label class="control-label">Dimenciones</label>
+        {{form.dimenciones| attr:"class:form-control"}}
+        <label class="control-label">Peso</label>
+        {{form.peso| attr:"class:form-control"| attr:"type:number"}}
+        <label class="control-label">Embalaje</label>
+        {{form.embalaje| attr:"class:form-control"| attr:"rows:1"}}
+        <label class="control-label">Estiba</label>
+        {{form.estiba| attr:"class:form-control"| attr:"rows:1"}}
+        <label class="control-label">Marca</label>
+        {{form.marca| attr:"class:form-control"| attr:"rows:1"}}
+        <label class="control-label">Mercancia</label>
+        {{form.mercancia| attr:"class:form-control"| attr:"rows:1"}}
+        <br>
+        <br>
+
+        <button type="submit" class="btn btn-danger float">Guardar</button>
+    </div>
+    </form></div>
+</div>
+</div>
+
+{% endblock %}

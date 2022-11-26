@@ -1,0 +1,54 @@
+:root{
+    --dark: #16191c;
+    --dark-x: #1e2126;
+    --ligth: #ffffff;
+    --rojocubacontrol: #bb0000;
+}
+body{
+    font-weight: 300;
+    color: var(--ligth);
+}
+.formu{
+    color:var(--dark-x)!important
+}
+.bg-dark{
+    background-color: var(--dark)!important;
+}
+.bg-dark-x{
+    background-color: var(--dark-x);
+}
+.form-control, .btn{
+    min-height: 3.125rem;
+    line-height: initial;
+}
+.btn-rojocubacontrol{
+    background-color: var(--rojocubacontrol);
+    color: var(--ligth);
+}
+.btn-rojocubacontrol:hover{
+    background-color: rgba(187, 0, 0, .7);
+    color: rgba(255, 255, 255, .4)
+}
+.font-weight-bold{
+    font-weight: bold;
+}
+.img-1{
+    background-image: url(../Imagenes/1.jpg);
+    background-size: cover;
+    background-position: center;
+}
+.img-2{
+    background-image: url(../Imagenes/2.jpg);
+    background-size: cover;
+    background-position: center;
+}
+.img-3{
+    background-image: url(../Imagenes/3.png);
+    background-size: cover;
+    background-position: center;
+}
+.img-4 {
+    background-image: url(../Imagenes/4.jpg);
+    background-size: cover;
+    background-position: center;
+}

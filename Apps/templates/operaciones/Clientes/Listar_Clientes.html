@@ -1,0 +1,80 @@
+{% extends '_layout.html' %}
+{%block title%}Clientes{%endblock%}
+{%block pagina%}Clientes{%endblock%}
+{% block contenido %}
+<br>
+<br>
+<div class="card">
+    <div class="carda-body">
+        <h2 class="p-4">Listado de Clientes</h2>
+        <div class="p-4">
+            {%if perms.Operaciones.add_clientes%}
+            <button onclick="abrir('{%url 'nuevo_cliente'%}')"  class="btn btn-danger">Nuevo</button>
+            {%endif%}
+            <br>
+            <br>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                <th scope="col">Numero de Contrato</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Fecha de Firma</th>
+                <th scope="col">Monto</th>
+                <th scope="col">Tipo de Empresa</th>
+                <th scope="col">Opciones</th>
+            </tr>
+            </thead>
+            <tbody>
+                {%for c in clientes%}
+                <tr>
+                <td>{{c.numero_contrato}}</td>
+                <td>{{c.empresa.nombre}}</td>
+                <td>{{c.fechafirma.day}}/{{c.fechafirma.month}}/{{c.fechafirma.year}}</td>
+                <td>{{c.monto}}</td>
+                <td>{{c.tipo_empresa}}</td>
+                <td>
+                    {%if perms.Operaciones.change_clientes%}
+                    <a href="{%url 'modificar_cliente' c.id%}"  class="btn btn-sm btn-success">Modificar</a>|
+                    {%endif%}
+                    {%if perms.Operaciones.delete_clientes%}
+                    <a href="#" onclick="eliminar({{c.id}})" class="btn btn-sm btn-danger">Eliminar</a>
+                    {%endif%}
+                </td>
+            </tr>
+                {%endfor%}
+            </tbody>
+            </table>
+        </div>
+    </div>
+</div>   
+<div class="modal fade" id="edicion" role="dialog">
+
+</div>
+{% endblock %}
+{%block js%}
+<script type="text/javascript">
+    function abrir(url){
+    $('#edicion').load(url, function(){
+    $(this).modal('show');
+    })
+    }
+    function eliminar(id){
+     Swal.fire({
+     "title":"¿Estas seguro?",
+     "text": "esta accion no se puede deshacer",
+     "icon":"question",
+     "showCancelButton":true,
+     "cancelButtonText":"No, Cancelar",
+     "confirmButtonText":"Si, Eliminar",
+     "reverseButtons":true,
+     "confirmButtonColor":"#dc3545",
+     })
+     .then(function(result){
+     if(result.isConfirmed){
+     window.location.href="/eliminar_cliente/"+id+"/"
+     }
+     }
+     )
+     }
+</script>
+{%endblock%}

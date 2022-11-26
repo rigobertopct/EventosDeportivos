@@ -1,0 +1,65 @@
+{% extends '_layout.html' %}
+{%block pagina%}Solicitudes{%endblock%}
+{%block title%}Solicitudes{%endblock%}
+{% block contenido %}
+<br>
+<br>
+<div class="card">
+  <div class="carda-body">
+    <h2 class="p-4">Modificar Solicitud</h2>
+    <div class="p-4 formu">
+    <form method="post">
+            {% load widget_tweaks %}
+            {%csrf_token%}
+            <label class="control-label">Tipo de Solicitud</label>
+                {{form.tipo_solicitud| attr:"class:form-control"}}
+                <label class="control-label">Contrato de Compraventa</label>
+                {{form.contrato| attr:"class:form-control"| attr:"rows:1"}}
+                <label class="control-label">Fecha de Solicitud</label>
+                {{form.fecha_Solicitud| attr:"class:form-control"|attr:"type:date"}}
+                <label class="control-label">Fecha de la Inspeccion</label>
+                {{form.fecha_Inspeccion| attr:"class:form-control"|attr:"type:date"}}
+                <label class="control-label">Crea Solicitud</label>
+                {{form.id_cliente| attr:"class:form-control"}}
+                <label class="control-label">Vendedor</label>
+                {{form.vendedor| attr:"class:form-control"}}
+                <label class="control-label">Comprador</label>
+                {{form.comprador| attr:"class:form-control"}}
+                <label class="control-label">Receptor</label>
+                {{form.receptor| attr:"class:form-control"}}
+                <script>
+                function toggle(o) {
+                var buque=document.querySelector(".buque");
+                var contenedor=document.querySelector(".contenedor");
+                if (o.value=="contenedor"){
+                contenedor.style.display="block";
+                buque.style.display="none";}
+                else{
+                contenedor.style.display="none";
+                buque.style.display="block";}
+                }
+                </script>
+                    <label>Medio de Carga</label>
+                {{form.medio| attr:"class:form-select"| attr:"onclick:toggle(this)"}}
+                <div style="display: none" class="contenedor">
+                    <label class="control-label">Contenedor</label>
+                    {{form.id_contenedor| attr:"class:form-control"}}
+                </div>
+                <div style="display: block" class="buque">
+                    <label class="control-label">Buque</label>
+                    {{form.id_buque| attr:"class:form-control"}}
+                </div>
+
+                <label class="control-label">Servicio</label>
+                {{form.servicio| attr:"class:list-group"}}
+        <br>
+        <br>
+
+        <button type="submit" class="btn btn-danger float">Crear Servicio</button>
+        <button type="reset" class="btn btn-secondary float">Cancelar</button>
+    </div>
+    </form></div>
+</div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,78 @@
+{% extends '_layout.html' %}
+{%block pagina%}Usuarios{%endblock%}
+{%block title%}Usuarios{%endblock%}
+{% block contenido %}
+<br>
+<br>
+<div class="card">
+    <div class="carda-body">
+        <h2 class="p-4">Listado de Usuarios</h2>
+        <div class="p-4">
+            {%if perms.Operaciones.add_servicio%}
+            <button onclick="abrir('{%url 'registro'%}')"  class="btn btn-danger">Nuevo</button>
+            {%endif%}
+            <br>
+            <br>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">Usuario</th>
+                    <th scope="col">Nombre y Apellidos</th>
+                    <th scope="col">Correo</th>
+                    <th scope="col">Opciones</th>
+                </tr>
+                </thead>
+                <tbody>
+                {%for c in usuarios%}
+                <tr>
+                    <td>{{c.username}}</td>
+                    <td>{{c.first_name}} {{c.last_name}}</td>
+                    <td>{{c.email}}</td>
+                    {%ifnotequal c.username 'admin'%}
+                    <td>
+                        {%if perms.Operaciones.change_user%}
+                        <a href="{%url 'modificar_usuario' c.id%}"  class="btn btn-sm btn-success">Modificar</a>|
+                        {%endif%}
+                        {%if perms.Operaciones.delete_user%}
+                        <a href="#" onclick="eliminar({{c.id}})" class="btn btn-sm btn-danger">Eliminar</a></td>
+                    {%endif%}
+                    {%endifnotequal%}
+                </tr>
+
+                {%endfor%}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="edicion" role="dialog">
+
+</div>
+{% endblock %}
+{%block js%}
+<script type="text/javascript">
+    function abrir(url){
+    $('#edicion').load(url, function(){
+    $(this).modal('show');
+    })
+    }
+    function eliminar(id){
+     Swal.fire({
+     "title":"¿Estas seguro?",
+     "text": "esta accion no se puede deshacer",
+     "icon":"question",
+     "showCancelButton":true,
+     "cancelButtonText":"No, Cancelar",
+     "confirmButtonText":"Si, Eliminar",
+     "reverseButtons":true,
+     "confirmButtonColor":"#dc3545",
+     })
+     .then(function(result){
+     if(result.isConfirmed){
+     window.location.href="/eliminar_usuario/"+id+"/"
+     }
+     }
+     )
+     }
+</script>
+{%endblock%}

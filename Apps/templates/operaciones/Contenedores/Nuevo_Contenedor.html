@@ -1,0 +1,36 @@
+<div class="modal-dialog modal-lg" role="document">-->
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 class="modale-title">Nuevo Contenedor</h2>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form action="{%url 'nuevo_contenedor'%}" method="post">
+        <div class="modal-body">
+        {% load widget_tweaks %}
+        {%csrf_token%}
+        <label class="control-label">Numero de Contenedor</label>
+        {{form.numero| attr:"class:form-control"| attr:"rows:1"}}
+        <label class="control-label">Dimenciones</label>
+        {{form.dimenciones| attr:"class:form-control"}}
+        <label class="control-label">Peso</label>
+        {{form.peso| attr:"class:form-control"}}
+        <label class="control-label">Cantidad</label>
+        {{form.cantidad| attr:"class:form-control"}}
+        <label class="control-label">Embalaje</label>
+        {{form.embalaje| attr:"class:form-control"| attr:"rows:1"}}
+        <label class="control-label">Estiba</label>
+        {{form.estiba| attr:"class:form-control"| attr:"rows:1"}}
+        <label class="control-label">Marca</label>
+        {{form.marca| attr:"class:form-control"| attr:"rows:1"}}
+        <label class="control-label">Mercancia</label>
+        {{form.mercancia| attr:"class:form-control"| attr:"rows:1"}}
+        <label class="control-label">Solicitud</label>
+        {{form.solicitud| attr:"class:form-control"| attr:"rows:1"}}
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-success">Confirmar</button>
+        </div>
+        </form>
+    </div>
+</div>

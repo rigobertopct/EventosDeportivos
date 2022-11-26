@@ -1,0 +1,80 @@
+{% extends '_layout.html' %}
+{%block pagina%}Contenedores{%endblock%}
+{%block title%}Contenedores{%endblock%}
+{% block contenido %}
+<br>
+<br>
+<div class="card">
+    <div class="carda-body">
+        <h2 class="p-4">Listado de Contenedores</h2>
+        <div class="p-4">
+            {%if perms.Operaciones.add_contenedor%}
+            <button onclick="abrir('{%url 'nuevo_contenedor'%}')"  class="btn btn-danger">Nuevo</button>
+            {%endif%}
+            <br>
+            <br>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                <th scope="col">Numero del Contenedor</th>
+                <th scope="col">Dimenciones</th>
+                <th scope="col">Cantidad</th>
+                <th scope="col">Mercancia</th>
+                <th>Peso</th>
+                <th scope="col">Opciones</th>
+            </tr>
+            </thead>
+            <tbody>
+                {%for c in contenedores%}
+                <tr>
+                <td>{{c.numero}}</td>
+                <td>{{c.dimenciones}}</td>
+                <td>{{c.cantidad}}</td>
+                <td>{{c.mercancia}}</td>
+                <td>{{c.peso}}</td>
+                <td>
+                    {%if perms.Operaciones.change_contenedor%}
+                    <a href="{%url 'modificar_contenedor' c.id%}"  class="btn btn-sm btn-success">Modificar</a>|
+                    {%endif%}
+                    {%if perms.Operaciones.delete_contenedor%}
+                    <a href="#" onclick="eliminar({{c.id}})" class="btn btn-sm btn-danger">Eliminar</a></td>
+                    {%endif%}
+            </tr>
+
+                {%endfor%}
+            </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="edicion" role="dialog">
+
+</div>
+{% endblock %}
+{%block js%}
+<script type="text/javascript">
+    function abrir(url){
+    $('#edicion').load(url, function(){
+    $(this).modal('show');
+    })
+    }
+    function eliminar(id){
+     Swal.fire({
+     "title":"¿Estas seguro?",
+     "text": "esta accion no se puede deshacer",
+     "icon":"question",
+     "showCancelButton":true,
+     "cancelButtonText":"No, Cancelar",
+     "confirmButtonText":"Si, Eliminar",
+     "reverseButtons":true,
+     "confirmButtonColor":"#dc3545",
+     })
+     .then(function(result){
+     if(result.isConfirmed){
+     window.location.href="/eliminar_contenedor/"+id+"/"
+     }
+     }
+     )
+     }
+</script>
+{%endblock%}

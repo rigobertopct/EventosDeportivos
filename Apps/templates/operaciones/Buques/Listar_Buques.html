@@ -1,0 +1,81 @@
+{% extends '_layout.html' %}
+{%block pagina%}Buques{%endblock%}
+{%block title%}Buques{%endblock%}
+{% block contenido %}
+<br>
+<br>
+<div class="card">
+    <div class="carda-body">
+        <h2 class="p-4">Listado de Buques</h2>
+        <div class="p-4">
+            {%if perms.Operaciones.add_buque%}
+            <button onclick="abrir('{%url 'nuevo_buque'%}')"  class="btn btn-danger">Nuevo</button>
+            {%endif%}
+            <br>
+            <br>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                <th scope="col">Nombre</th>
+                <th scope="col">Cantidad</th>
+                <th scope="col">Producto</th>
+                <th scope="col">BL</th>
+                <th scope="col">Manifiesto</th>
+                <th scope="col">Opciones</th>
+            </tr>
+            </thead>
+            <tbody>
+                {%for c in buques%}
+                <tr>
+                <td>{{c.nombre}}</td>
+                <td>{{c.catidad}}</td>
+                <td>{{c.producto}}</td>
+                <td>{{c.bl}}</td>
+                <td>{{c.manifiesto}}</td>
+                <td>
+                    {%if perms.Operaciones.change_buque%}
+                    <a href="{%url 'modificar_buque' c.id%}"  class="btn btn-sm btn-success">Modificar</a>|
+                    {%endif%}
+                    {%if perms.Operaciones.delete_buque%}
+                    <a href="#" onclick="eliminar({{c.id}})" class="btn btn-sm btn-danger">Eliminar</a>
+                    {%endif%}
+                </td>
+            </tr>
+
+                {%endfor%}
+            </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="edicion" role="dialog">
+
+</div>
+{% endblock %}
+{%block js%}
+<script type="text/javascript">
+    function abrir(url){
+    $('#edicion').load(url, function(){
+    $(this).modal('show');
+    })
+    }
+    function eliminar(id){
+     Swal.fire({
+     "title":"¿Estas seguro?",
+     "text": "esta accion no se puede deshacer",
+     "icon":"question",
+     "showCancelButton":true,
+     "cancelButtonText":"No, Cancelar",
+     "confirmButtonText":"Si, Eliminar",
+     "reverseButtons":true,
+     "confirmButtonColor":"#dc3545",
+     })
+     .then(function(result){
+     if(result.isConfirmed){
+     window.location.href="/eliminar_buque/"+id+"/"
+     }
+     }
+     )
+     }
+</script>
+{%endblock%}

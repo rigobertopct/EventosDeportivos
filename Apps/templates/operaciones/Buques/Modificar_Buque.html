@@ -1,0 +1,33 @@
+{% extends '_layout.html' %}
+{%block pagina%}Modificar Buque{%endblock%}
+{%block title%}Buques{%endblock%}
+{% block contenido %}
+<br>
+<br>
+<div class="card">
+  <div class="carda-body">
+    <h2 class="p-4">Modificar Buque</h2>
+    <div class="p-4 formu">
+    <form method="post">
+            {% load widget_tweaks %}
+            {%csrf_token%}
+        <label class="control-label">Nombre del Buque</label>
+        {{form.nombre| attr:"class:form-control"| attr:"rows:1"}}
+        <label class="control-label">Cantidad</label>
+        {{form.catidad| attr:"class:form-control"| attr:"type:number"}}
+        <label class="control-label">Producto</label>
+        {{form.producto| attr:"class:form-control"| attr:"rows:1"}}
+        <label class="control-label">BL</label>
+        {{form.bl| attr:"class:form-control"| attr:"rows:1"}}
+        <label class="control-label">Manifiesto</label>
+        {{form.manifiesto| attr:"class:form-control"| attr:"rows:1"}}
+        <br>
+        <br>
+
+        <button type="submit" class="btn btn-danger float">Guardar</button>
+    </div>
+    </form></div>
+</div>
+</div>
+
+{% endblock %}
