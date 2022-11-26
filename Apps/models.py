@@ -162,11 +162,7 @@ class Deporte(models.Model):
 
 
 class Disciplina(models.Model):
-    deporte = models.OneToOneField(
-        Deporte,
-        on_delete=models.CASCADE,
-        primary_key=True,
-    )
+    deporte_id = models.ForeignKey(Deporte, on_delete=models.SET_NULL, null=True, blank=True)
     nombre = models.CharField(max_length=250, verbose_name="Nombre de la disciplina")
     def __str__(self):
         return self.nombre
@@ -181,6 +177,7 @@ class Atleta(models.Model):
     fecha = models.DateField(verbose_name="Fecha de Nacimiento")
     disciplina_id = models.ForeignKey(Disciplina, on_delete=models.SET_NULL, null=True, blank=True)
     image = models.ImageField(upload_to='deporte')
+
     def __str__(self):
         return self.nombre
 
