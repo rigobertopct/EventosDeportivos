@@ -201,10 +201,23 @@ class ClaseDeportiva(models.Model):
         db_table = 'clases'
 
 class Partido(models.Model):
+    nombre = models.CharField(max_length=250, verbose_name="Nombre")
     atleta_id = models.ForeignKey(Atleta, on_delete=models.SET_NULL, null=True, blank=True)
-    result = models.CharField(max_length=250, verbose_name="Resultado")
+    result = models.CharField(max_length=1000, verbose_name="Resultado")
+    lugar_obtuvo = models.CharField(max_length=250, verbose_name="Lugar")
     observaciones = models.CharField(max_length=10000, verbose_name="Observaciones")
     class Meta:
         verbose_name = 'partido'
         verbose_name_plural = 'partidos'
         db_table = 'partidos'
+
+class Pais(models.Model):
+    nombre = models.CharField(max_length=250, verbose_name="Nombre")
+    sigla = models.CharField(max_length=250, verbose_name="Resultado")
+    flag = models.ImageField(upload_to='flags')
+
+    class Meta:
+        verbose_name = 'pais'
+        verbose_name_plural = 'paises'
+        db_table = 'paises'
+
