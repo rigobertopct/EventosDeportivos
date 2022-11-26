@@ -74,3 +74,13 @@ class DeporteForm(forms.ModelForm):
     class Meta:
         model=Deporte
         fields='__all__'
+
+class AtletaForm(forms.ModelForm):
+    class Meta:
+        model = Deporte
+        fields = '__all__'
+
+class ClaseDForm(forms.ModelForm):
+    class Meta:
+        model = ClaseDeportiva
+        fields = '__all__'

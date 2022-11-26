@@ -1,0 +1,12 @@
+[
+  {
+     "model": "Deporte",
+     "pk": 2,
+     "fields": {
+      "nombre": "Pelota"
+
+    }
+  }
+]
+
+

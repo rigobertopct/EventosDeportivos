@@ -447,6 +447,48 @@ def modificar_deporte(request, id):
         data["form"] = formulario
     return render(request, 'operaciones/Deportes/Modificar_Deportes.html', data)
 
+@login_required
+def listar_clases(request):
+    data = {
+        "clases": ClaseDeportiva.objects.all()
+    }
+    return render(request, 'operaciones/claseD/Listar_ClaseD.html', data)
+@login_required
+def eliminar_clase(request, id):
+    clase = get_object_or_404(ClaseDeportiva, id=id)
+    clase.delete()
+    return redirect(to="listar_clases")
+@login_required
+def nueva_clase(request):
+    data = {
+        'form': ClaseDForm()
+    }
+    if request.method == 'POST':
+        formulario = ClaseDForm(data=request.POST)
+        if formulario.is_valid():
+            formulario.save()
+            messages.success(request, "Se ha creado una nueva clase deportiva correctamente")
+            return redirect(to="listar_clases")
+        data = {
+            "form": formulario
+        }
+
+    return render(request, 'operaciones/ClaseD/Nuevo_ClaseD.html', data)
+@login_required
+def modificar_clase(request, id):
+    clase = get_object_or_404(ClaseDeportiva, id=id)
+    data = {
+        "form": ClaseDForm(instance=clase)
+    }
+    if request.method == 'POST':
+        formulario =ClaseDForm(data=request.POST, instance=clase)
+        if formulario.is_valid():
+            formulario.save()
+            messages.success(request, "Se ha actualizado la clase deportiva")
+            return redirect(to="listar_clases")
+        data["form"] = formulario
+    return render(request, 'operaciones/ClaseD/Modificar_ClaseD.html', data)
+
 
 @login_required
 def listar_solicitud(request):

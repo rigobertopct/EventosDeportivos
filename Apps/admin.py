@@ -13,3 +13,4 @@ admin.site.register(Servicios)
 admin.site.register(Buque)
 admin.site.register(Orden)
 admin.site.register(Imagenes)
+

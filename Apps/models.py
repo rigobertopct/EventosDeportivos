@@ -174,3 +174,40 @@ class Disciplina(models.Model):
         verbose_name = 'Disciplina'
         verbose_name_plural = 'disciplina'
         db_table = 'disciplinas'
+
+class Atleta(models.Model):
+    nombre = models.CharField(max_length=250, verbose_name="Nombre")
+    apel = models.CharField(max_length=250, verbose_name="Apellido")
+    fecha = models.DateField(verbose_name="Fecha de Nacimiento")
+    disciplina_id = models.ForeignKey(Disciplina, on_delete=models.SET_NULL, null=True, blank=True)
+    image = models.ImageField(upload_to='deporte')
+    def __str__(self):
+        return self.nombre
+
+    class Meta:
+        verbose_name = 'atletas'
+        verbose_name_plural = 'atletas'
+        db_table = 'atletas'
+
+
+class ClaseDeportiva(models.Model):
+    nombre = models.CharField(max_length=250, verbose_name="Nombre")
+    siglas = models.CharField(max_length=250, verbose_name="Apellido")
+    deporte_id = models.ForeignKey(Deporte, on_delete=models.SET_NULL, null=True, blank=True)
+
+    def __str__(self):
+        return self.nombre
+
+    class Meta:
+        verbose_name = 'clased'
+        verbose_name_plural = 'claseds'
+        db_table = 'clases'
+
+class Partido(models.Model):
+    atleta_id = models.ForeignKey(Atleta, on_delete=models.SET_NULL, null=True, blank=True)
+    result = models.CharField(max_length=250, verbose_name="Resultado")
+    observaciones = models.CharField(max_length=10000, verbose_name="Observaciones")
+    class Meta:
+        verbose_name = 'partido'
+        verbose_name_plural = 'partidos'
+        db_table = 'partidos'

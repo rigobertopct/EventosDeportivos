@@ -39,6 +39,11 @@ urlpatterns = [
     path('modificar_deportes/<id>/', modificar_deporte, name='modificar_deportes'),
     path('eliminar_deportes/<id>/', eliminar_deporte, name='eliminar_deporte'),
 
+    path('listar_clases/', listar_clases, name="listar_clases"),
+    path('nueva_clase/', nueva_clase, name="nueva_clase"),
+    path('modificar_clase/<id>/', modificar_clase, name='modificar_clase'),
+    path('eliminar_clase/<id>/', eliminar_clase, name='eliminar_clase'),
+
     path('listar_solicitud/', listar_solicitud, name="listar_solicitud"),
     path('nueva_solicitud/', nueva_solicitud, name="nueva_solicitud"),
     path('modificar_solicitud/<id>/', modificar_solicitud, name='modificar_solicitud'),
