@@ -222,3 +222,15 @@ class Pais(models.Model):
         verbose_name_plural = 'paises'
         db_table = 'paises'
 
+class Participacion(models.Model):
+    evento_id = models.ForeignKey(CodEvento, on_delete=models.SET_NULL, null=True, blank=True)
+    disciplina_id = models.ForeignKey(Disciplina, on_delete=models.SET_NULL, null=True, blank=True)
+    atleta_id = models.ForeignKey(Atleta, on_delete=models.SET_NULL, null=True, blank=True)
+
+
+    class Meta:
+        verbose_name = 'participacion'
+        verbose_name_plural = 'participacions'
+        db_table = 'participacions'
+
+

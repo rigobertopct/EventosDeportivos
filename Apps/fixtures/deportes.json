@@ -1,7 +1,7 @@
 [
   {
      "model": "Deporte",
-     "pk": 2,
+     "pk": 20,
      "fields": {
       "nombre": "Pelota"
 

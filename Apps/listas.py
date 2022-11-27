@@ -22,3 +22,7 @@ tipo_incidencia=(
     ('Faltante', 'Faltante'),
     ('Averias','Averias')
 )
+tipo_participacion=( ('0', 'Seleccione'),
+    ('1', 'Equipo'),
+    ('2', 'Individual')
+)
