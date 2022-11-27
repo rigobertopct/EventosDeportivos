@@ -1,0 +1,25 @@
+{% extends '_layout.html' %}
+{%block pagina%}Modificar Deporte{%endblock%}
+{%block title%}Deportes{%endblock%}
+{% block contenido %}
+<br>
+<br>
+<div class="card">
+  <div class="carda-body">
+    <h2 class="p-4">Modificar Deporte</h2>
+    <div class="p-4 formu">
+    <form method="post">
+            {% load widget_tweaks %}
+            {%csrf_token%}
+        <label class="control-label">Nombre</label>
+        {{form.nombre| attr:"class:form-control"| attr:"rows:1"}}
+        <br>
+        <br>
+
+        <button type="submit" class="btn btn-danger float">Guardar</button>
+    </div>
+    </form></div>
+</div>
+</div>
+
+{% endblock %}

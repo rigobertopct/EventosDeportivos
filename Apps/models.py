@@ -293,6 +293,3 @@ class Participacion(models.Model):
         verbose_name_plural = 'participacions'
         db_table = 'participacions'
 
-
-
-

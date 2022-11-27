@@ -8,16 +8,11 @@ urlpatterns = [
     path('modificar_usuario/<id>/', modificar_usuario, name='modificar_usuario'),
     path('', inicio, name="inicio"),
 
-    path('nuevo_cliente/', nuevo_cliente, name="nuevo_cliente"),
+    path('nueva_disciplina/', nueva_disciplina, name="nueva_disciplina"),
     path('listar_cliente/', listar_cliente, name="listar_cliente"),
     path('eliminar_cliente/<id>/', eliminar_cliente, name='eliminar_cliente'),
     path('modificar_cliente/<id>/', modificar_cliente, name='modificar_cliente'),
     path('cliente_reporte/', cliente_reporte, name='cliente_reporte'),
-
-    path('listar_personas/', listar_personas, name="listar_personas"),
-    path('eliminar_persona/<id>/', eliminar_persona, name='eliminar_persona'),
-    path('modificar_persona/<id>/', modificar_persona, name='modificar_persona'),
-    path('nueva_persona/', nueva_persona, name='nueva_persona'),
 
     path('listar_contenedor/', listar_contenedor, name="listar_contenedor"),
     path('eliminar_contenedor/<id>/', eliminar_contenedor, name='eliminar_contenedor'),
@@ -44,22 +39,10 @@ urlpatterns = [
     path('modificar_clase/<id>/', modificar_clase, name='modificar_clase'),
     path('eliminar_clase/<id>/', eliminar_clase, name='eliminar_clase'),
 
-    path('listar_solicitud/', listar_solicitud, name="listar_solicitud"),
-    path('nueva_solicitud/', nueva_solicitud, name="nueva_solicitud"),
-    path('modificar_solicitud/<id>/', modificar_solicitud, name='modificar_solicitud'),
-    path('eliminar_solicitud/<id>/', eliminar_solicitud, name='eliminar_solicitud'),
-
     path('listar_buques/', listar_buques, name="listar_buques"),
     path('modificar_buque/<id>/', modificar_buque, name='modificar_buque'),
     path('eliminar_buque/<id>/', eliminar_buque, name='eliminar_buque'),
     path('nuevo_buque/', nuevo_buque, name='nuevo_buque'),
-
-    path('subir_imagenes/', subir_imagenes, name='subir_imagenes'),
-    path('ver_imagenes/<str:no_orden>/', ver_imagenes, name='ver_imagenes'),
-
-    path('nuevo_comprador/', nuevo_comprador, name="nuevo_comprador"),
-    path('nuevo_vendedor/', nuevo_vendedor, name="nuevo_vendedor"),
-    path('nuevo_receptor/', nuevo_receptor, name="nuevo_receptor"),
 
     path('parte/', parte, name='parte')
 

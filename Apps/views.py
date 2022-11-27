@@ -139,28 +139,27 @@ def modificar_usuario(request, id):
     return render(request, 'operaciones/Clientes/modificar_usuario.html', data)
 
 @login_required
-def nuevo_cliente(request):
+def nueva_disciplina(request):
     data = {
-        'form': ClienteForm()
+        'form': DisciplinaForm()
     }
     if request.method == 'POST':
-        formulario = ClienteForm(data=request.POST)
+        formulario = DisciplinaForm(data=request.POST)
         if formulario.is_valid():
             formulario.save()
-            messages.success(request, "Se ha creado el cliente correctamente")
-            return redirect(to="listar_cliente")
+            messages.success(request, "Se ha creado la Disciplina correctamente")
+            return redirect(to="listar_disciplinas")
         data = {
             "form": formulario,
         }
+    return render(request, 'operaciones/Clientes/Nueva_Disciplina.html', data)
 
-    return render(request, 'operaciones/Clientes/Nuevo_Cliente.html', data)
 @login_required
 def listar_cliente(request):
     data = {
-        "empresas": Empresa.objects.all(),
-        "clientes": Cliente.objects.all(),
+        "discilplinas": Empresa.objects.all(),
     }
-    return render(request, 'operaciones/Clientes/Listar_Clientes.html', data)
+    return render(request, 'operaciones/Disciplinas/Listar_Disciplinas.html', data)
 @login_required
 def cliente_reporte(request):
     data = {
@@ -276,50 +275,6 @@ def eliminar_contenedor(request, id):
     var.delete()
     return redirect(to="listar_contenedor")
 
-
-@login_required
-def listar_personas(request):
-    data = {
-        "personas": Persona.objects.all()
-    }
-    return render(request, 'operaciones/Personas/Listar_Personas.html', data)
-@login_required
-def eliminar_persona(request, id):
-    persona = get_object_or_404(Persona, ci=id)
-    persona.delete()
-    return redirect(to="listar_personas")
-@login_required
-def nueva_persona(request):
-    data = {
-        'form': PersonaForm()
-    }
-    if request.method == 'POST':
-        formulario = PersonaForm(data=request.POST)
-        if formulario.is_valid():
-            formulario.save()
-            messages.success(request, "Se ha creado la persona correctamente")
-            return redirect(to="listar_personas")
-        data = {
-            "form": formulario
-        }
-
-    return render(request, 'operaciones/Personas/Nueva_Persona.html', data)
-@login_required
-def modificar_persona(request, id):
-    persona = get_object_or_404(Persona, ci=id)
-    data = {
-        "form": PersonaForm(instance=persona)
-    }
-    if request.method == 'POST':
-        formulario = PersonaForm(data=request.POST, instance=persona)
-        if formulario.is_valid():
-            formulario.save()
-            messages.success(request, "Se ha actualizado la persona")
-            return redirect(to="listar_personas")
-        data["form"] = formulario
-    return render(request, 'operaciones/Personas/Modificar_Personas.html', data)
-
-
 @login_required
 def listar_servicios(request):
     data = {
@@ -416,6 +371,7 @@ def eliminar_deporte(request, id):
     deporte = get_object_or_404(Deporte, id=id)
     deporte.delete()
     return redirect(to="listar_deportes")
+
 @login_required
 def nuevo_deporte(request):
     data = {
@@ -430,8 +386,8 @@ def nuevo_deporte(request):
         data = {
             "form": formulario
         }
-
     return render(request, 'operaciones/Deportes/Nuevo_Deporte.html', data)
+
 @login_required
 def modificar_deporte(request, id):
     deporte = get_object_or_404(Deporte, id=id)
@@ -472,8 +428,9 @@ def nueva_clase(request):
         data = {
             "form": formulario
         }
-
     return render(request, 'operaciones/ClaseD/Nuevo_ClaseD.html', data)
+
+
 @login_required
 def modificar_clase(request, id):
     clase = get_object_or_404(ClaseDeportiva, id=id)
@@ -488,139 +445,6 @@ def modificar_clase(request, id):
             return redirect(to="listar_clases")
         data["form"] = formulario
     return render(request, 'operaciones/ClaseD/Modificar_ClaseD.html', data)
-
-
-@login_required
-def listar_solicitud(request):
-    data = {
-        "solicitudes": Solicitud.objects.all(),
-        'barcos': Buque.objects.all(),
-        'contenedores': Contenedor.objects.all()
-    }
-    return render(request, 'operaciones/Solicitudes/Listar_Solicitudes.html', data)
-
-
-@login_required
-def eliminar_solicitud(request, id):
-    solicitud = get_object_or_404(Solicitud, id=id)
-    solicitud.delete()
-    return redirect(to="listar_servicios")
-
-
-@login_required
-def nueva_solicitud(request):
-    data = {
-        'form': SolicitudForm(),
-    }
-    if request.method == 'POST':
-        formulario = SolicitudForm(data=request.POST)
-        if formulario.is_valid():
-            formulario.save()
-            messages.success(request, "Se ha creado la solicitud correctamente")
-            return redirect(to="listar_solicitud")
-        data = {
-            "form": formulario,
-        }
-
-    return render(request, 'operaciones/Solicitudes/Nueva_Solicitud.html', data)
-
-
-@login_required
-def modificar_solicitud(request, id):
-    solicitud = get_object_or_404(Solicitud, id=id)
-    data = {
-        "form": SolicitudForm(instance=solicitud)
-    }
-    if request.method == 'POST':
-        formulario = SolicitudForm(data=request.POST, instance=solicitud)
-        if formulario.is_valid():
-            formulario.save()
-            messages.success(request, "Se ha actualizado la solicitud")
-            return redirect(to="listar_solicitudes")
-        data["form"] = formulario
-    return render(request, 'operaciones/Solicitudes/Modificar_Solicitud.html', data)
-
-
-@login_required
-def subir_imagenes(request):
-    data = {
-        'form': ImagenesForm()
-    }
-    if request.method == 'POST':
-        form = ImagenesForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            messages.success(request, "Se ha cargado la imagen")
-            return redirect(to="listar_ordenes")
-            messages.success(request, "Se ha cargado las imagenes correctamente")
-        data = {
-            "form": form
-        }
-    return render(request, 'operaciones/Ordenes/subir_imagenes.html', data)
-
-
-def ver_imagenes(request, no_orden):
-   imagenes=get_object_or_404(Imagenes, orden=no_orden)
-   orden=no_orden
-   data = {
-        "no_orden": orden,
-        "imagen": imagenes
-    }
-   return render(request, 'operaciones/Operaciones/ver_imagenes.html', data)
-
-
-@login_required
-def nuevo_vendedor(request):
-    data = {
-        'form': VendedorForm(),
-    }
-    if request.method == 'POST':
-        formulario = VendedorForm(data=request.POST)
-        if formulario.is_valid():
-            formulario.save()
-            messages.success(request, "Se ha creado el vendedor correctamente")
-            return redirect(to="listar_solicitud")
-        data = {
-            "form": formulario,
-        }
-
-    return render(request, 'operaciones/Solicitudes/Nuevo_Vendedor.html', data)
-
-
-@login_required
-def nuevo_comprador(request):
-    data = {
-        'form': CompradorForm(),
-    }
-    if request.method == 'POST':
-        formulario = CompradorForm(data=request.POST)
-        if formulario.is_valid():
-            formulario.save()
-            messages.success(request, "Se ha creado el comprador correctamente")
-            return redirect(to="listar_solicitud")
-        data = {
-            "form": formulario,
-        }
-
-    return render(request, 'operaciones/Solicitudes/Nuevo_Comprador.html', data)
-
-
-@login_required
-def nuevo_receptor(request):
-    data = {
-        'form': ReceptorForm(),
-    }
-    if request.method == 'POST':
-        formulario = ReceptorForm(data=request.POST)
-        if formulario.is_valid():
-            formulario.save()
-            messages.success(request, "Se ha creado el receptor correctamente")
-            return redirect(to="listar_solicitud")
-        data = {
-            "form": formulario,
-        }
-
-    return render(request, 'operaciones/Solicitudes/Nueva_Solicitud.html', data)
 
 def parte(request):
     # Establecer el tipo de HTTPResponse
