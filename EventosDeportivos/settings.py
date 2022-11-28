@@ -45,7 +45,6 @@ INSTALLED_APPS = [
     'widget_tweaks',
 ]
 CRISPY_TEMPLATES_PACK = 'bootstrap4'
-
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

@@ -1,25 +1,33 @@
 {% extends '_layout.html' %}
-{%block pagina%}Modificar Deporte{%endblock%}
-{%block title%}Deportes{%endblock%}
+{% block pagina %}Modificar Deporte{% endblock %}
+{% block title %}Deportes{% endblock %}
 {% block contenido %}
-<br>
-<br>
-<div class="card">
-  <div class="carda-body">
-    <h2 class="p-4">Modificar Deporte</h2>
-    <div class="p-4 formu">
-    <form method="post">
-            {% load widget_tweaks %}
-            {%csrf_token%}
-        <label class="control-label">Nombre</label>
-        {{form.nombre| attr:"class:form-control"| attr:"rows:1"}}
-        <br>
-        <br>
+    <br>
+    <br>
+    <div class="card">
+        <div class="carda-body">
+            <h2 class="p-4">Modificar Atleta</h2>
+            <div class="p-4 formu">
+                <form method="post">
+                    {% load widget_tweaks %}
+                    {% csrf_token %}
+                    <label class="control-label">Nombre</label>
+                    {{ form.nombre | attr:"class:form-control"| attr:"rows:1" }}
+                    <label class="control-label">Apellidos</label>
+                    {{ form.apel | attr:"class:form-control"| attr:"rows:1" }}
+                    <label class="control-label">Fecha de Nacimiento</label>
+                    {{ form.fecha | attr:"class:form-control"| attr:"rows:1" | attr:"type:date" }}
+                    <label class="control-label">Disciplina</label>
+                    {{ form.disciplina | attr:"class:form-control"| attr:"rows:1" }}
+                    <label class="control-label">Imagen</label>
+                    {{ form.image| attr:"class:form-control"| attr:"rows:1"| attr:"type:file" }}
+                    <br>
+                    <br>
 
-        <button type="submit" class="btn btn-danger float">Guardar</button>
+                    <button type="submit" class="btn btn-danger float">Guardar</button>
+            </div>
+            </form></div>
     </div>
-    </form></div>
-</div>
-</div>
+    </div>
 
 {% endblock %}

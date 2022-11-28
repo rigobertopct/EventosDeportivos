@@ -1,3 +1,4 @@
+from dal import autocomplete
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
@@ -73,7 +74,7 @@ class DeporteForm(forms.ModelForm):
 
 class AtletaForm(forms.ModelForm):
     class Meta:
-        model = Deporte
+        model = Atleta
         fields = '__all__'
 
 class ClaseDForm(forms.ModelForm):

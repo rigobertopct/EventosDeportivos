@@ -1,6 +1,6 @@
-from django.urls import path
+from django.template.defaulttags import url
+from django.urls import path, include
 from .views import *
-
 urlpatterns = [
     path('registro/', registro, name="registro"),
     path('listar_usuarios/', listar_usuarios, name="listar_usuarios"),
@@ -43,6 +43,6 @@ urlpatterns = [
     path('eliminar_atleta/<id>/', eliminar_atleta, name='eliminar_atleta'),
     path('nuevo_atleta/', nuevo_atleta, name='nuevo_atleta'),
 
-    path('parte/', parte, name='parte')
+    path('parte/', parte, name='parte'),
 
 ]

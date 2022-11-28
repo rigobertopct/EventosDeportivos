@@ -7,6 +7,7 @@ from io import BytesIO
 # # 1. Exportar biblioteca de Excel
 import xlwt
 from django.contrib import messages
+from django.contrib.admin.templatetags.admin_list import results
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.http.response import HttpResponse
@@ -95,6 +96,7 @@ def inicio(request):
     }
     return render(request, "operaciones/inicio.html", context)
 
+
 @login_required
 def registro(request):
     data = {
@@ -112,18 +114,24 @@ def registro(request):
         data["form"] = formulario
 
     return render(request, 'registration/registro.html', data)
+
+
 @login_required
 def listar_usuarios(request):
-    data={
-        'usuarios':User.objects.all()
+    data = {
+        'usuarios': User.objects.all()
     }
     return render(request, 'registration/listar_usuarios.html', data)
+
+
 @login_required
 def eliminar_usuario(request, id):
     user = get_object_or_404(User, id=id)
     user.delete()
     messages.success(request, "Usuario eliminado")
     return redirect(to="listar_usuarios")
+
+
 def modificar_usuario(request, id):
     user = get_object_or_404(User, id=id)
     data = {
@@ -137,6 +145,7 @@ def modificar_usuario(request, id):
             return redirect(to="listar_usuarios")
         data["form"] = formulario
     return render(request, 'operaciones/Clientes/modificar_usuario.html', data)
+
 
 @login_required
 def nueva_disciplina(request):
@@ -154,12 +163,14 @@ def nueva_disciplina(request):
         }
     return render(request, 'operaciones/Disciplinas/Nueva_Disciplina.html', data)
 
+
 @login_required
 def listar_disciplinas(request):
     data = {
         "discilplinas": Disciplina.objects.all(),
     }
     return render(request, 'operaciones/Disciplinas/Listar_Disciplinas.html', data)
+
 
 @login_required
 def modificar_disciplina(request, id):
@@ -175,11 +186,14 @@ def modificar_disciplina(request, id):
             return redirect(to="listar_disciplinas")
         data["form"] = formulario
     return render(request, 'operaciones/Disciplinas/Modificar_Disciplinas.html', data)
+
+
 @login_required
 def eliminar_disciplina(request, id):
     disciplina = get_object_or_404(Disciplina, id=id)
     disciplina.delete()
     return redirect(to="listar_disciplinas")
+
 
 @login_required
 def listar_atletas(request):
@@ -187,6 +201,8 @@ def listar_atletas(request):
         "atletas": Atleta.objects.all()
     }
     return render(request, 'operaciones/Atletas/Listar_Atletas.html', data)
+
+
 @login_required
 def nuevo_atleta(request):
     data = {
@@ -201,13 +217,16 @@ def nuevo_atleta(request):
         data = {
             "form": formulario
         }
+    return render(request, 'operaciones/Atletas/Nuevo_Atleta.html', data)
 
-    return render(request, 'operaciones/Buques/Nuevo_Buque.html', data)
+
 @login_required
 def eliminar_atleta(request, id):
     atleta = get_object_or_404(Atleta, id=id)
     atleta.delete()
     return redirect(to="listar_atletas")
+
+
 @login_required
 def modificar_atleta(request, id):
     atleta = get_object_or_404(Atleta, id=id)
@@ -230,6 +249,8 @@ def listar_contenedor(request):
         "contenedores": Contenedor.objects.all()
     }
     return render(request, 'operaciones/Contenedores/Listar_Contenedores.html', data)
+
+
 @login_required
 def modificar_contenedor(request, id):
     contenedor = get_object_or_404(Contenedor, id=id)
@@ -248,6 +269,7 @@ def modificar_contenedor(request, id):
 
     return render(request, 'operaciones/Contenedores/Modificar_Contenedor.html', data)
 
+
 @login_required
 def nuevo_contenedor(request):
     data = {
@@ -264,11 +286,14 @@ def nuevo_contenedor(request):
         }
 
     return render(request, 'operaciones/Contenedores/Nuevo_Contenedor.html', data)
+
+
 @login_required
 def eliminar_contenedor(request, id):
     var = get_object_or_404(Contenedor, id=id)
     var.delete()
     return redirect(to="listar_contenedor")
+
 
 @login_required
 def listar_servicios(request):
@@ -276,11 +301,15 @@ def listar_servicios(request):
         "servicios": Servicios.objects.all()
     }
     return render(request, 'operaciones/Servicios/Listar_Servicios.html', data)
+
+
 @login_required
 def eliminar_servicio(request, id):
     servicio = get_object_or_404(Servicios, id=id)
     servicio.delete()
     return redirect(to="listar_servicios")
+
+
 @login_required
 def nuevo_servicio(request):
     data = {
@@ -297,6 +326,8 @@ def nuevo_servicio(request):
         }
 
     return render(request, 'operaciones/Servicios/Nuevo_Servicio.html', data)
+
+
 @login_required
 def modificar_servicio(request, id):
     servicio = get_object_or_404(Servicios, id=id)
@@ -319,6 +350,8 @@ def listar_ordenes(request):
         "ordenes": Orden.objects.all()
     }
     return render(request, 'operaciones/Ordenes/Listar_Ordenes.html', data)
+
+
 @login_required
 def nueva_orden(request):
     data = {
@@ -334,11 +367,15 @@ def nueva_orden(request):
             "form": formulario
         }
     return render(request, 'operaciones/Ordenes/Nueva_orden.html', data)
+
+
 @login_required
 def eliminar_orden(request, id):
     orden = get_object_or_404(Orden, id=id)
     orden.delete()
     return redirect(to="listar_ordenes")
+
+
 @login_required
 def modificar_orden(request, id):
     orden = get_object_or_404(Orden, id=id)
@@ -361,11 +398,14 @@ def listar_deportes(request):
         "deportes": Deporte.objects.all()
     }
     return render(request, 'operaciones/Deportes/Listar_Deportes.html', data)
+
+
 @login_required
 def eliminar_deporte(request, id):
     deporte = get_object_or_404(Deporte, id=id)
     deporte.delete()
     return redirect(to="listar_deportes")
+
 
 @login_required
 def nuevo_deporte(request):
@@ -383,6 +423,7 @@ def nuevo_deporte(request):
         }
     return render(request, 'operaciones/Deportes/Nuevo_Deporte.html', data)
 
+
 @login_required
 def modificar_deporte(request, id):
     deporte = get_object_or_404(Deporte, id=id)
@@ -398,17 +439,22 @@ def modificar_deporte(request, id):
         data["form"] = formulario
     return render(request, 'operaciones/Deportes/Modificar_Deportes.html', data)
 
+
 @login_required
 def listar_clases(request):
     data = {
         "clases": ClaseDeportiva.objects.all()
     }
     return render(request, 'operaciones/claseD/Listar_ClaseD.html', data)
+
+
 @login_required
 def eliminar_clase(request, id):
     clase = get_object_or_404(ClaseDeportiva, id=id)
     clase.delete()
     return redirect(to="listar_clases")
+
+
 @login_required
 def nueva_clase(request):
     data = {
@@ -433,13 +479,14 @@ def modificar_clase(request, id):
         "form": ClaseDForm(instance=clase)
     }
     if request.method == 'POST':
-        formulario =ClaseDForm(data=request.POST, instance=clase)
+        formulario = ClaseDForm(data=request.POST, instance=clase)
         if formulario.is_valid():
             formulario.save()
             messages.success(request, "Se ha actualizado la clase deportiva")
             return redirect(to="listar_clases")
         data["form"] = formulario
     return render(request, 'operaciones/ClaseD/Modificar_ClaseD.html', data)
+
 
 def parte(request):
     # Establecer el tipo de HTTPResponse
@@ -472,7 +519,7 @@ def parte(request):
               """)
 
     # Escribe el título del archivo
-    sheet.write(0,0, 'Numero de Orden', style_heading)
+    sheet.write(0, 0, 'Numero de Orden', style_heading)
     sheet.write(0, 1, 'Cliente', style_heading)
     sheet.write(0, 2, 'Fecha de la inspeccion', style_heading)
     sheet.write(0, 3, 'Medio de Carga', style_heading)
@@ -481,7 +528,7 @@ def parte(request):
     data_row = 1
     # UserTable.objects.all () Esta es una condición de consulta, que se puede ajustar de acuerdo con sus necesidades reales.
     for result in Orden.objects.all():
-    # Formato de fecha y hora
+        # Formato de fecha y hora
         fecha = result.solicitud.fecha_Inspeccion.strftime('%Y-%m-%d')
         sheet.write(data_row, 0, result.no_orden)
         sheet.write(data_row, 1, result.solicitud.id_cliente.empresa.nombre)
