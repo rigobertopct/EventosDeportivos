@@ -152,81 +152,76 @@ def nueva_disciplina(request):
         data = {
             "form": formulario,
         }
-    return render(request, 'operaciones/Clientes/Nueva_Disciplina.html', data)
+    return render(request, 'operaciones/Disciplinas/Nueva_Disciplina.html', data)
 
 @login_required
-def listar_cliente(request):
+def listar_disciplinas(request):
     data = {
-        "discilplinas": Empresa.objects.all(),
+        "discilplinas": Disciplina.objects.all(),
     }
     return render(request, 'operaciones/Disciplinas/Listar_Disciplinas.html', data)
-@login_required
-def cliente_reporte(request):
-    data = {
-        "clientes": Cliente.objects.all(),
-    }
-    return render(request, 'reportes/clientes.html', data)
-@login_required
-def modificar_cliente(request, id):
-    cliente = get_object_or_404(Cliente, id=id)
-    data = {
-        "form": ClienteForm(instance=cliente)
-    }
-    if request.method == 'POST':
-        formulario = ClienteForm(data=request.POST, instance=cliente)
-        if formulario.is_valid():
-            formulario.save()
-            messages.success(request, "Se ha actualizado el cliente")
-            return redirect(to="listar_cliente")
-        data["form"] = formulario
-    return render(request, 'operaciones/Clientes/Modificar_Cliente.html', data)
-@login_required
-def eliminar_cliente(request, id):
-    cliente = get_object_or_404(Cliente, id=id)
-    cliente.delete()
-    return redirect(to="listar_cliente")
 
 @login_required
-def listar_buques(request):
+def modificar_disciplina(request, id):
+    disciplina = get_object_or_404(Disciplina, id=id)
     data = {
-        "buques": Buque.objects.all()
-    }
-    return render(request, 'operaciones/Buques/Listar_Buques.html', data)
-@login_required
-def nuevo_buque(request):
-    data = {
-        'form': BuqueForm()
+        "form": DisciplinaForm(instance=disciplina)
     }
     if request.method == 'POST':
-        formulario = BuqueForm(data=request.POST)
+        formulario = DisciplinaForm(data=request.POST, instance=disciplina)
         if formulario.is_valid():
             formulario.save()
-            messages.success(request, "Se ha creado el buque correctamente")
-            return redirect(to="listar_buques")
+            messages.success(request, "Se ha actualizado la Disciplina")
+            return redirect(to="listar_disciplinas")
+        data["form"] = formulario
+    return render(request, 'operaciones/Disciplinas/Modificar_Disciplinas.html', data)
+@login_required
+def eliminar_disciplina(request, id):
+    disciplina = get_object_or_404(Disciplina, id=id)
+    disciplina.delete()
+    return redirect(to="listar_disciplinas")
+
+@login_required
+def listar_atletas(request):
+    data = {
+        "atletas": Atleta.objects.all()
+    }
+    return render(request, 'operaciones/Atletas/Listar_Atletas.html', data)
+@login_required
+def nuevo_atleta(request):
+    data = {
+        'form': AtletaForm()
+    }
+    if request.method == 'POST':
+        formulario = AtletaForm(data=request.POST)
+        if formulario.is_valid():
+            formulario.save()
+            messages.success(request, "Se ha creado el atleta correctamente")
+            return redirect(to="listar_atletas")
         data = {
             "form": formulario
         }
 
     return render(request, 'operaciones/Buques/Nuevo_Buque.html', data)
 @login_required
-def eliminar_buque(request, id):
-    servicio = get_object_or_404(Buque, id=id)
-    servicio.delete()
-    return redirect(to="listar_buques")
+def eliminar_atleta(request, id):
+    atleta = get_object_or_404(Atleta, id=id)
+    atleta.delete()
+    return redirect(to="listar_atletas")
 @login_required
-def modificar_buque(request, id):
-    buque = get_object_or_404(Buque, id=id)
+def modificar_atleta(request, id):
+    atleta = get_object_or_404(Atleta, id=id)
     data = {
-        "form": BuqueForm(instance=buque)
+        "form": AtletaForm(instance=atleta)
     }
     if request.method == 'POST':
-        formulario = BuqueForm(data=request.POST, instance=buque)
+        formulario = AtletaForm(data=request.POST, instance=atleta)
         if formulario.is_valid():
             formulario.save()
-            messages.success(request, "Se ha actualizado el buque")
-            return redirect(to="listar_buques")
+            messages.success(request, "Se ha actualizado el atleta")
+            return redirect(to="listar_atletas")
         data["form"] = formulario
-    return render(request, 'operaciones/Buques/Modificar_Buque.html', data)
+    return render(request, 'operaciones/Atletas/Modificar_Atleta.html', data)
 
 
 @login_required

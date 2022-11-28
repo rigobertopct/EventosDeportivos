@@ -6,18 +6,18 @@
 <br>
 <div class="card">
   <div class="carda-body">
-    <h2 class="p-4">Modificar Disciplina</h2>
+    <h2 class="p-4">Modificar Deporte</h2>
     <div class="p-4 formu">
     <form method="post">
             {% load widget_tweaks %}
             {%csrf_token%}
         <label class="control-label">Nombre</label>
         {{form.nombre| attr:"class:form-control"| attr:"rows:1"}}
-        {{form.deporte_id| attr:"class:form-control"}}
         <br>
         <br>
 
         <button type="submit" class="btn btn-danger float">Guardar</button>
+    </div>
     </form></div>
 </div>
 </div>

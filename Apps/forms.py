@@ -66,10 +66,6 @@ class ImagenesForm(forms.ModelForm):
     class Meta:
         model=Imagenes
         fields='__all__'
-class PersonaForm(forms.ModelForm):
-    class Meta:
-        model=Persona
-        fields='__all__'
 class DeporteForm(forms.ModelForm):
     class Meta:
         model=Deporte

@@ -66,11 +66,7 @@
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
             <li class="dropdown-header">
-              {% ifequal vencidos 1 %}
-              Tienes 1 notificación
-              {% else %}
-              Tienes {{vencidos}} notificaciones
-              {%endifequal%}
+                Tienes 1 notificación
               </li>
             <li>
               <hr class="dropdown-divider">
@@ -157,7 +153,7 @@
             </a>
           </li>
           <li>
-            <a href="">
+            <a href="{% url "listar_disciplinas" %}">
               <i class="bi bi-circle"></i><span>Disciplinas</span>
             </a>
           </li>
@@ -178,39 +174,24 @@
 
       <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-people-fill"></i><span>Clientes</span><i class="bi bi-chevron-down ms-auto"></i>
+          <i class="bi bi-people-fill"></i><span>Atletas</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="{% url 'listar_cliente' %}">
-              <i class="bi bi-circle"></i><span>Listar Clientes</span>
-            </a>
-          </li>
-          <li>
-            <a href="components-badges.html">
-              <i class="bi bi-circle"></i><span>Ver Clientes Vencidos</span>
+            <a href="{% url "listar_atletas" %}">
+              <i class="bi bi-circle"></i><span>Listar Atletas</span>
             </a>
           </li>
         </ul>
       </li><!-- End Components Nav -->
       <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-clipboard-data"></i><span>Solicitudes</span><i class="bi bi-chevron-down ms-auto"></i>
+          <i class="bi bi-clipboard-data"></i><span>Eventos</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="{% url 'listar_solicitud'%}">
-              <i class="bi bi-circle"></i><span>Listar Solicitudes</span>
-            </a>
-          </li>
-          <li>
-            <a href="{% url 'listar_buques' %}">
-              <i class="bi bi-circle"></i><span>Buque</span>
-            </a>
-          </li>
-          <li>
-            <a href="{% url 'listar_contenedor' %}">
-              <i class="bi bi-circle"></i><span>Contenedor</span>
+            <a href="#">
+              <i class="bi bi-circle"></i><span>Listar Eventos</span>
             </a>
           </li>
         </ul>

@@ -9,10 +9,9 @@ urlpatterns = [
     path('', inicio, name="inicio"),
 
     path('nueva_disciplina/', nueva_disciplina, name="nueva_disciplina"),
-    path('listar_cliente/', listar_cliente, name="listar_cliente"),
-    path('eliminar_cliente/<id>/', eliminar_cliente, name='eliminar_cliente'),
-    path('modificar_cliente/<id>/', modificar_cliente, name='modificar_cliente'),
-    path('cliente_reporte/', cliente_reporte, name='cliente_reporte'),
+    path('listar_disciplinas/', listar_disciplinas, name="listar_disciplinas"),
+    path('eliminar_disciplina/<id>/', eliminar_disciplina, name='eliminar_disciplina'),
+    path('modificar_disciplina/<id>/', modificar_disciplina, name='modificar_disciplina'),
 
     path('listar_contenedor/', listar_contenedor, name="listar_contenedor"),
     path('eliminar_contenedor/<id>/', eliminar_contenedor, name='eliminar_contenedor'),
@@ -39,10 +38,10 @@ urlpatterns = [
     path('modificar_clase/<id>/', modificar_clase, name='modificar_clase'),
     path('eliminar_clase/<id>/', eliminar_clase, name='eliminar_clase'),
 
-    path('listar_buques/', listar_buques, name="listar_buques"),
-    path('modificar_buque/<id>/', modificar_buque, name='modificar_buque'),
-    path('eliminar_buque/<id>/', eliminar_buque, name='eliminar_buque'),
-    path('nuevo_buque/', nuevo_buque, name='nuevo_buque'),
+    path('listar_atletas/', listar_atletas, name="listar_atletas"),
+    path('modificar_atleta/<id>/', modificar_atleta, name='modificar_atleta'),
+    path('eliminar_atleta/<id>/', eliminar_atleta, name='eliminar_atleta'),
+    path('nuevo_atleta/', nuevo_atleta, name='nuevo_atleta'),
 
     path('parte/', parte, name='parte')
 

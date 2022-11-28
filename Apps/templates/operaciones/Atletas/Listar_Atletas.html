@@ -1,30 +1,45 @@
 {% extends '_layout.html' %}
-
-{%block pagina%}{%block title%}Disciplinas{%endblock%}{%endblock%}
+{%block title%}{%block pagina%}Atletas{%endblock%}{%endblock%}
 {% block contenido %}
 <br>
 <div class="card">
     <div class="carda-body">
-        <h2 class="p-4">Listado de Disciplinas</h2>
+        <h2 class="p-4">Listado de Atletas</h2>
         <div class="p-4">
-            <button onclick="abrir('{%url 'nueva_disciplina'%}')"  class="btn btn-danger">Nuevo</button>
+            <button onclick="abrir('{%url 'nuevo_atleta'%}')"  class="btn btn-danger">Nuevo</button>
             <br>
             <br>
             <table class="dataTable">
                 <thead>
                 <tr>
+                <th scope="col">Foto</th>
                 <th scope="col">Nombre</th>
+                <th scope="col">Apellidos</th>
+                <th scope="col">Fecha de Nacimiento</th>
                 <th scope="col">Deporte</th>
+                <th scope="col">Disciplina</th>
                 <th scope="col">Opciones</th>
             </tr>
             </thead>
             <tbody>
-                {%for c in discilplinas%}
+                {%for c in atletas%}
                 <tr>
+                <td><img style="width: 30px; height: 30px" src="{{ c.image.url }}"></td>
                 <td>{{c.nombre}}</td>
-                <td>{{c.deporte_id.nombre}}</td>
+                <td>{{c.apel}}</td>
+                <td>{{c.fecha}}</td>
+                  <td>
+                    {% for a in c.disciplina.all %}
+                *{{a.deporte_id}} </br>
+                        {% endfor %}
+                </td>
                 <td>
-                    <a href="{%url 'modificar_disciplina' c.id%}" class="btn btn-sm btn-info"><i class="bi bi-pencil"></i> Editar</a>
+                    {% for a in c.disciplina.all %}
+                *{{a}} </br>
+                        {% endfor %}
+                </td>
+                <td>
+                    <a href="{%url 'modificar_atleta' c.id%}" class="btn btn-sm btn-info"><i class="bi bi-pencil"></i> Editar</a>
                                 ||
                     <a onclick="eliminar({{ c.id }})" class="btn btn-sm btn-danger"><i class="bi bi-trash"></i> Eliminar
                     </a></td>
@@ -59,7 +74,7 @@
      })
      .then(function(result){
      if(result.isConfirmed){
-     window.location.href="/eliminar_disciplina/"+id+"/"
+     window.location.href="/eliminar_atleta/"+id+"/"
      }
      }
      )

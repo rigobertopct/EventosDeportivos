@@ -202,7 +202,7 @@ class Deporte(models.Model):
 
 
 class Disciplina(models.Model):
-    deporte_id = models.ForeignKey(Deporte, on_delete=models.SET_NULL, null=True, blank=True)
+    deporte_id = models.ForeignKey(Deporte, on_delete=models.CASCADE)
     nombre = models.CharField(max_length=250, verbose_name="Nombre de la disciplina")
 
     def __str__(self):
@@ -218,11 +218,11 @@ class Atleta(models.Model):
     nombre = models.CharField(max_length=250, verbose_name="Nombre")
     apel = models.CharField(max_length=250, verbose_name="Apellido")
     fecha = models.DateField(verbose_name="Fecha de Nacimiento")
-    disciplina_id = models.ForeignKey(Disciplina, on_delete=models.SET_NULL, null=True, blank=True)
+    disciplina = models.ManyToManyField(Disciplina)
     image = models.ImageField(upload_to='deporte')
 
     def __str__(self):
-        return self.nombre
+        return self.nombre+" "+self.apel
 
     class Meta:
         verbose_name = 'atletas'

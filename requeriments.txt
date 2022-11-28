@@ -5,13 +5,9 @@ django-colorfield
 django-excel
 django-flat-responsive
 django-flat-theme
-django-pyodbc-azure-2019
 django-widget-tweaks
 lml
-mysqlclient==2.1.0
 Pillow
-psycopg2==2.9.2
-psycopg2-binary==2.9.2
 pyexcel-io==0.6.6
 pyexcel-xlsx==0.6.0
 pyexcel-xlsxw==0.6.1
@@ -20,5 +16,3 @@ six
 sqlparse
 xlwt==1.3.0
 django_crispy_forms
-django
-fontawesomefree

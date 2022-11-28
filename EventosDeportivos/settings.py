@@ -43,7 +43,6 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
     'crispy_forms',
     'widget_tweaks',
-    'fontawesomefree',
 ]
 CRISPY_TEMPLATES_PACK = 'bootstrap4'
 
