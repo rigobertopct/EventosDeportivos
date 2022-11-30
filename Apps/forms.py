@@ -71,7 +71,10 @@ class DeporteForm(forms.ModelForm):
     class Meta:
         model=Deporte
         fields='__all__'
-
+class PaisForm(forms.ModelForm):
+    class Meta:
+        model=Pais
+        fields='__all__'
 class AtletaForm(forms.ModelForm):
     class Meta:
         model = Atleta

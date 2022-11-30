@@ -488,6 +488,53 @@ def modificar_clase(request, id):
     return render(request, 'operaciones/ClaseD/Modificar_ClaseD.html', data)
 
 
+
+@login_required
+def listar_paises(request):
+    data = {
+        "paises": Pais.objects.all()
+    }
+    return render(request, 'operaciones/Paises/Listar_paises.html', data)
+
+@login_required
+def eliminar_pais(request, id):
+    deporte = get_object_or_404(Deporte, id=id)
+    deporte.delete()
+    return redirect(to="listar_paises")
+
+
+@login_required
+def nuevo_pais(request):
+    data = {
+        'form': DeporteForm()
+    }
+    if request.method == 'POST':
+        formulario = DeporteForm(data=request.POST)
+        if formulario.is_valid():
+            formulario.save()
+            messages.success(request, "Se ha creado el país correctamente")
+            return redirect(to="listar_paises")
+        data = {
+            "form": formulario
+        }
+    return render(request, 'operaciones/Paises/Nuevo_pais.html', data)
+
+
+@login_required
+def modificar_pais(request, id):
+    pais = get_object_or_404(Pais, id=id)
+    data = {
+        "form": PaisForm(instance=pais)
+    }
+    if request.method == 'POST':
+        formulario = DeporteForm(data=request.POST, instance=pais)
+        if formulario.is_valid():
+            formulario.save()
+            messages.success(request, "Se ha actualizado el país")
+            return redirect(to="listar_paises")
+        data["form"] = formulario
+    return render(request, 'operaciones/Paises/Modificar_pais.html', data)
+
 def parte(request):
     # Establecer el tipo de HTTPResponse
     response = HttpResponse(content_type='application/vnd.ms-excel')

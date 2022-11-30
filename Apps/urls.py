@@ -31,7 +31,12 @@ urlpatterns = [
     path('listar_deportes/', listar_deportes, name="listar_deportes"),
     path('nuevo_deporte/', nuevo_deporte, name="nuevo_deporte"),
     path('modificar_deportes/<id>/', modificar_deporte, name='modificar_deportes'),
-    path('eliminar_deportes/<id>/', eliminar_deporte, name='eliminar_deporte'),
+    path('eliminar_deportes/<id>/', eliminar_deporte, name='eliminar_deporte'), path('listar_deportes/', listar_deportes, name="listar_deportes"),
+
+    path('listar_paises/', listar_paises, name="listar_paises"),
+    path('nuevo_pais/', nuevo_pais, name="nuevo_pais"),
+    path('modificar_pais/<id>/', modificar_pais, name='modificar_pais'),
+    path('eliminar_pais/<id>/', eliminar_pais, name='eliminar_pais'),
 
     path('listar_clases/', listar_clases, name="listar_clases"),
     path('nueva_clase/', nueva_clase, name="nueva_clase"),
